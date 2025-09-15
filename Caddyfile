@@ -16,7 +16,7 @@
                 file_server
         }
 
-				@api host api.{$DOMAIN}
+        @api host api.{$DOMAIN}
         handle @api {
             reverse_proxy express-backend:3000
         }
