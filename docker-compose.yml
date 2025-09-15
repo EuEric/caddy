@@ -1,0 +1,23 @@
+services:
+
+  caddy:
+    build: .
+    container_name: caddy
+    hostname: caddy
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy_config:/config
+      - ./caddy_data:/data
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+    name: $DOCKER_NETWORK

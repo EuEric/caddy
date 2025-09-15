@@ -1,0 +1,23 @@
+{
+        admin 0.0.0.0:2019
+}
+
+*.cerberalarms.com {
+        tls {
+                dns cloudflare {env.CF_API_TOKEN}
+                propagation_delay 2m
+                resolvers 1.1.1.1
+        }
+
+        @caddy host caddy.{$DOMAIN}
+        handle @caddy {
+                root * /usr/share/caddy
+                php_fastcgi localhost:80
+                file_server
+        }
+
+				@api host api.{$DOMAIN}
+        handle @api {
+            reverse_proxy express-backend:3000
+        }
+}
