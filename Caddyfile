@@ -20,4 +20,9 @@
         handle @api {
             reverse_proxy express-backend:3000
         }
+
+        @mqtt host mqtt.{$DOMAIN}
+        handle @mqtt {
+            reverse_proxy mqtt5:9001
+        }
 }
