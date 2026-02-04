@@ -38,4 +38,10 @@
 	handle @mqttws {
 		reverse_proxy http://mqtt5:9001 
 	}
+
+	@fw host firmware.{$DOMAIN}
+	handle @fw {
+		reverse_proxy http://firmware-service:8080
+	}
+
 }
