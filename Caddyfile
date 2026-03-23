@@ -45,7 +45,7 @@
 	}
 }
 
-dev.api.{$DOMAIN} {
+prod.api.{$DOMAIN} {
 	tls {
 		key_type rsa2048
 		issuer acme {
@@ -55,5 +55,5 @@ dev.api.{$DOMAIN} {
 		}
 	}
 
-	reverse_proxy http://api-dev:3000
+	reverse_proxy http://api-prod:3000
 }
