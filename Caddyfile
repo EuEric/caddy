@@ -29,9 +29,14 @@
 		file_server
 	}
 
-	@api host api.{$DOMAIN}
-	handle @api {
-		reverse_proxy http://express-backend:3000
+	@devapi host api.{$DOMAIN}
+	handle @devapi {
+		reverse_proxy http://api-dev:3000
+	}
+
+	@prodapi host prod.api.{$DOMAIN}
+	handle @prodapi {
+		reverse_proxy http://api-prod:3000
 	}
 
 	@mqttws host mqtt.{$DOMAIN}
