@@ -34,11 +34,6 @@
 		reverse_proxy http://api-dev:3000
 	}
 
-	@prodapi host prod.api.{$DOMAIN}
-	handle @prodapi {
-		reverse_proxy http://api-prod:3000
-	}
-
 	@mqttws host mqtt.{$DOMAIN}
 	handle @mqttws {
 		reverse_proxy http://mqtt5:9001 
@@ -48,5 +43,17 @@
 	handle @fw {
 		reverse_proxy http://firmware-service:8080
 	}
+}
 
+dev.api.{$DOMAIN} {
+	tls {
+		key_type rsa2048
+		issuer acme {
+			dns cloudflare {env.CF_API_TOKEN}
+			propagation_delay 2m
+			resolvers 1.1.1.1
+		}
+	}
+
+	reverse_proxy http://api-dev:3000
 }
