@@ -52,6 +52,7 @@
 	@cms host cms.{$DOMAIN}
 	handle @cms {
 		handle /api/* {
+			rewrite * /dev{uri}
 			reverse_proxy http://api-dev:3000
 		}
 
