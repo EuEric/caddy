@@ -49,12 +49,12 @@
 		reverse_proxy http://firmware-service:8080
 	}
 
-	@frontend host frontend.{$DOMAIN}
-	handle @frontend {
+	@cms host cms.{$DOMAIN}
+	handle @cms {
 		handle /api/* {
 			reverse_proxy http://api-dev:3000
 		}
 
-		reverse_proxy http://moby-frontend:8080
+		reverse_proxy http://moby-cms:8080
 	}
 }
